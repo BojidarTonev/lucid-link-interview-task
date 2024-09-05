@@ -1,0 +1,79 @@
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.content-wrapper .title {
+    font-size: 32px;
+    font-weight: 700;
+    padding-bottom: 3px;
+    border-bottom: 2px solid #b0fb16;
+    display: flex;
+    align-items: center;
+}
+
+.content-wrapper .file-content-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.file-content-container {
+    height: 80vh;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.file-content-container .selected-file-name {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #b0fb16;
+    font-weight: 500;
+}
+
+.file-content-container .logo {
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.file-content-container .text-content {
+    font-size: 24px;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2;
+}
+
+@media (max-width: 1170px) {
+    .file-content-container .logo {
+        height: 400px;
+        width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .file-content-container {
+        height: 40vh;
+    }
+    .file-content-container .logo {
+
+    }
+}
+
+@media (max-width: 570px) {
+    .file-content-container .logo {
+        height: 300px;
+        width: 300px;
+    }
+}

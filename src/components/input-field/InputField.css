@@ -1,0 +1,39 @@
+.lucid-input-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.lucid-input {
+    padding: 12px;
+    background-color: #222225;
+    border: 2px solid #62626c;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.lucid-input:focus {
+    border-color: #b0fb16;
+    border-width: 2px;
+    outline: none;
+}
+
+.lucid-label {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lucid-input:focus + .lucid-label,
+.lucid-input:not(:placeholder-shown) + .lucid-label {
+    top: -10px;
+    left: 8px;
+    font-size: 12px;
+    color: #3498db; /* Blue color for label on focus */
+}

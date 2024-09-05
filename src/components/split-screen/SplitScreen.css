@@ -1,0 +1,44 @@
+.split-screen {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.split-screen-left,
+.split-screen-right {
+    flex: 1;
+    padding: 20px 0 20px 20px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.split-screen-left {
+    border-right: 2px solid #ccc;
+}
+
+.split-screen-right {
+    border-left: 2px solid #ccc;
+}
+
+@media (max-width: 768px) {
+    .split-screen {
+        flex-direction: column;
+        height: 100vh; /* Full viewport height */
+    }
+
+    .split-screen-left,
+    .split-screen-right {
+        flex: 1;
+    }
+
+    .split-screen-left {
+        border-right: none;
+        border-bottom: 2px solid #ccc; /* Full-width bottom border */
+    }
+
+    .split-screen-right {
+        border-left: none;
+        border-top: none; /* Ensure there's no top border */
+    }
+}

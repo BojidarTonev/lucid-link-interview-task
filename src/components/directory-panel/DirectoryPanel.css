@@ -1,0 +1,54 @@
+.directory-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.directory-wrapper .title {
+    font-size: 32px;
+    font-weight: 700;
+    border-bottom: 2px solid #b0fb16;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 20px;
+}
+
+.directory-wrapper .title svg {
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.directory-wrapper .title svg:hover {
+    transform: scale(1.1);
+    color: #b0fb16;
+}
+
+.directory-wrapper .directory-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.not-logged-in-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.not-logged-in-wrapper .not-logged-in-message {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 0 10px 0;
+    align-self: center;
+}
+
+@media (max-width: 555px) {
+    .directory-content ul {
+        padding-left: 0;
+    }
+    .outer-list-item-wrapper span {
+        font-size: 16px;
+    }
+
+    .file-name-wrapper {
+        font-size: 12px;
+    }
+}

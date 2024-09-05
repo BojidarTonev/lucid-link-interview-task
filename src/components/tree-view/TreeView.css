@@ -1,0 +1,73 @@
+.tree-node-wrapper {
+    font-size: 18px;
+    padding: 8px 4px;
+}
+
+.tree-node-wrapper div {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.outer-list-item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 500;
+    padding: 8px 10px;
+    transition: all .2s ease-in-out;
+}
+.outer-list-item-wrapper:hover {
+    background-color: #202020;
+}
+.outer-list-item-wrapper span {
+    text-transform: uppercase;
+}
+.outer-list-operations {
+    margin-left: 20px;
+}
+.outer-list-operations svg {
+    margin-left: 15px;
+    transition: filter 0.2s ease;
+}
+.outer-list-operations svg:hover {
+    filter: brightness(1.5) contrast(1.5) saturate(1.5) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+}
+
+.open-list-item {
+    font-size: 20px;
+    font-weight: 700;
+    color: #b0fb16;
+    transition: all .2s ease-in-out;
+}
+.open-list-item:hover {
+    color: #658f0c;
+}
+
+.closed-list-item {
+    transition: all .2s ease-in-out;
+}
+
+.closed-list-item:hover {
+    color: #b0fb16;
+    font-weight: 600;
+    transform: scale(1.05);
+}
+
+.file-name-wrapper {
+    padding: 5px 10px;
+    color: white;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.file-name-wrapper:hover {
+    color: #b0fb16;
+    transform: scale(1.05);
+    background-color: #222225;
+}
+
+.selected-file {
+    color: black;
+    background-color: #b0fb16;
+}
