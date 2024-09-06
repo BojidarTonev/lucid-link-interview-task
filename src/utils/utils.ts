@@ -36,20 +36,6 @@ const readStreamToText = async (
                 reject(new Error('No response body found.'));
                 return;
             }
-
-            // Handle Node.js environment (IncomingMessage & SdkStreamMixin)
-            if (typeof body.pipe === 'function') {
-                const chunks: Buffer[] = [];
-                body.on('data', (chunk: Buffer) => {
-                    chunks.push(chunk);
-                });
-                body.on('end', () => {
-                    const responseBody = Buffer.concat(chunks).toString('utf-8');
-                    resolve(responseBody);
-                });
-                body.on('error', reject);
-            }
-            // Handle browser environment (ReadableStream)
             else if (body instanceof ReadableStream) {
                 const reader = body.getReader();
                 const stream = new ReadableStream({
@@ -74,14 +60,8 @@ const readStreamToText = async (
                 const responseBody = await new Response(stream).text();
                 resolve(responseBody);
             }
-            // Handle Blob in browser
             else if (body instanceof Blob) {
                 const responseBody = await body.text();
-                resolve(responseBody);
-            }
-            // Handle Buffer
-            else if (Buffer.isBuffer(body)) {
-                const responseBody = body.toString('utf-8');
                 resolve(responseBody);
             } else {
                 reject(new Error('Unsupported body type.'));
