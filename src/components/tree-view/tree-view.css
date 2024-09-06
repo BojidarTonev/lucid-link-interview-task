@@ -70,7 +70,7 @@
     filter: brightness(1.5) contrast(1.5) saturate(1.5) drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
 }
 
-.file-name-wrapper:hover {
+.file-name-wrapper:not(.selected-file):hover {
     color: var(--active-color);
     transform: scale(1.05);
     background-color: #222225;
