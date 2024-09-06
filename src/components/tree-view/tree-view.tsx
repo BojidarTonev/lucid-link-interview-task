@@ -1,6 +1,5 @@
 import {FC, MouseEvent, useState} from "react";
 import {
-    clearFileContent,
     setDeleteFileName,
     setSelectedFileName,
     setUploadFileDirectory
@@ -57,10 +56,6 @@ const TreeNode: FC<ITReeNodeProps> = ({ node, label, fullPath }) => {
         e.stopPropagation();
         const fileFullName = `${fullPath}${fileName}`.replace(/^\//, '');
 
-        const isDeleteFileSelected = fileFullName === selectedFileName;
-        if (isDeleteFileSelected) {
-            dispatch(clearFileContent())
-        }
         dispatch(setDeleteFileName(fileFullName));
         dispatch(openModal({
             title: 'ARE YOU SURE YOU WANT TO DELETE FILE:',
