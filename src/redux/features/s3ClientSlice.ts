@@ -1,25 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface S3ClientConfig {
-    accessKeyId: string;
-    secretAccessKey: string;
-    regionName: string;
-    bucketName: string;
+export interface IS3Credentials {
+    accessKeyId: string,
+    secretAccessKey: string,
+    bucketName: string,
+    region: string,
 }
 
 interface S3ClientState {
-    config: S3ClientConfig | null;
+    config: IS3Credentials | null;
 }
 
 const initialState: S3ClientState = {
     config: null,
 };
 
-const s3ClientSlice = createSlice({
+export const s3ClientSlice = createSlice({
     name: 's3Client',
     initialState,
     reducers: {
-        setS3ClientConfig(state, action: PayloadAction<S3ClientConfig>) {
+        setS3ClientConfig(state, action: PayloadAction<IS3Credentials>) {
             state.config = action.payload;
         },
         clearS3ClientConfig(state) {

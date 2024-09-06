@@ -2,10 +2,10 @@ import {FC, useCallback, useMemo} from 'react';
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store.ts";
 import Loader from "../loader/Loader.tsx";
-import LucidLinkLogo from '../../../public/lucidlink-logo.png';
-import './ContentPanel.css';
+import LucidLinkLogo from '/lucidlink-logo.png';
 import S3ClientSingleton from "../../s3ClientSingleton.ts";
 import ErrorText from "../error-text/error-text.tsx";
+import './ContentPanel.css';
 
 const ContentPanel: FC = () => {
     const { content, loading, error, selectedFileName } = useSelector((state: RootState) => state.fileContent);

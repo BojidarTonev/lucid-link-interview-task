@@ -1,4 +1,4 @@
-import {FC, useCallback, useMemo} from 'react';
+import {FC, useCallback, useEffect, useMemo} from 'react';
 import {useGetFilesQuery} from "../../redux/services/s3-api.ts";
 import TreeView from "../tree-view/TreeView.tsx";
 import Loader from "../loader/Loader.tsx";
@@ -15,14 +15,19 @@ import './DirectoryPanel.css';
 const DirectoryPanel: FC = () => {
     const dispatch = useDispatch();
     const { config } = useSelector((state: RootState) => state.s3Client);
-    const { data, error, isLoading } = useGetFilesQuery({});
-
     const isAuthenticated = useMemo(() => {
         if (!config) {
             return false
         }
         return S3ClientSingleton.getInstance(config);
     }, [config]);
+    const { data, error, isLoading, refetch } = useGetFilesQuery({}, {skip: !isAuthenticated});
+
+    useEffect(() => {
+        if (isAuthenticated && !data) {
+            refetch();
+        }
+    }, [isAuthenticated, data]);
 
     const onLoginButtonClick = () => {
         dispatch(openModal({title: 'SIGN IN', modalType: ModalTypes.AuthModal}));

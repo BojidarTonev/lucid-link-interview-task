@@ -1,5 +1,5 @@
 import { S3Client } from '@aws-sdk/client-s3';
-import {IS3Credentials} from "./redux/features/authSlice.ts";
+import {IS3Credentials} from "./redux/features/s3ClientSlice.ts";
 
 
 class S3ClientSingleton {
