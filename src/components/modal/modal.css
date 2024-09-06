@@ -75,6 +75,16 @@
     transform: scale(1.1);
 }
 
+.long-file-content-wrapper {
+    text-align: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 200px;
+}
+
 @media (max-width: 450px) {
     .modal-title {
         font-size: 16px;

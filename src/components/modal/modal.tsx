@@ -7,6 +7,7 @@ import AddDirectoryModal from "./modal-types/add-directory-modal.tsx";
 import AddFileModal from "./modal-types/add-file-modal.tsx";
 import DeleteFileModal from "./modal-types/delete-file-modal.tsx";
 import {useAppDispatch, useAppSelector} from "../../redux/store.ts";
+import ViewFullContentModal from "./modal-types/view-full-content-modal.tsx";
 import './modal.css';
 
 const Modal = (): ReactNode | null => {
@@ -23,6 +24,8 @@ const Modal = (): ReactNode | null => {
                 return <AddFileModal />;
             case ModalTypes.DeleteFileModal:
                 return <DeleteFileModal />
+            case ModalTypes.ViewFileFullContentModal:
+                return <ViewFullContentModal />
             default:
                 return <div/>;
         }

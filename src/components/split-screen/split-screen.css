@@ -19,6 +19,7 @@
 
 .split-screen-right {
     border-left: 2px solid #ccc;
+    overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -29,6 +30,7 @@
 
     .split-screen-left,
     .split-screen-right {
+        padding: 20px 0;
         flex: 1;
     }
 
