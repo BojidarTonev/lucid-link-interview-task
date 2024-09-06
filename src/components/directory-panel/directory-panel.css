@@ -45,6 +45,12 @@
     align-self: center;
 }
 
+@media (max-width: 950px) {
+    .directory-wrapper .directory-content {
+        margin: 30px 0;
+    }
+}
+
 @media (max-width: 555px) {
     .directory-content ul {
         padding-left: 0;
