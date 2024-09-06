@@ -28,6 +28,7 @@ const fileContentSlice = createSlice({
         },
         clearContent: (state) => {
             state.content = '';
+            state.selectedFileName = '';
             state.error = null;
             state.loading = false;
         },

@@ -1,22 +1,15 @@
-import {FC, useCallback, useMemo} from 'react';
+import {FC, useCallback} from 'react';
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store.ts";
 import Loader from "../loader/Loader.tsx";
 import LucidLinkLogo from '/lucidlink-logo.png';
-import S3ClientSingleton from "../../s3ClientSingleton.ts";
 import ErrorText from "../error-text/error-text.tsx";
+import useS3Auth from "../../hooks/use-s3-auth.ts";
 import './ContentPanel.css';
 
 const ContentPanel: FC = () => {
+    const isAuthenticated = useS3Auth();
     const { content, loading, error, selectedFileName } = useSelector((state: RootState) => state.fileContent);
-    const { config } = useSelector((state: RootState) => state.s3Client);
-
-    const isAuthenticated = useMemo(() => {
-        if (!config) {
-            return false
-        }
-        return S3ClientSingleton.getInstance(config);
-    }, [config]);
 
     const renderContentPanelContent = useCallback(() => {
         if (error) {

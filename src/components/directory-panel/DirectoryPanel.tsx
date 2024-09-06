@@ -1,26 +1,21 @@
-import {FC, useCallback, useEffect, useMemo} from 'react';
+import {FC, useCallback, useEffect} from 'react';
 import {useGetFilesQuery} from "../../redux/services/s3-api.ts";
 import TreeView from "../tree-view/TreeView.tsx";
 import Loader from "../loader/Loader.tsx";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../redux/store.ts";
+import {useDispatch} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 import Button from "../button/Button.tsx";
 import {ModalTypes, openModal} from "../../redux/features/modalSlice.ts";
 import {clearS3ClientConfig} from "../../redux/features/s3ClientSlice.ts";
-import S3ClientSingleton from "../../s3ClientSingleton.ts";
+import useS3Auth from "../../hooks/use-s3-auth.ts";
+import S3ClientSingleton from "../../s3-client-singleton.ts";
+import {clearContent} from "../../redux/features/fileContentSlice.ts";
 import './DirectoryPanel.css';
 
 const DirectoryPanel: FC = () => {
     const dispatch = useDispatch();
-    const { config } = useSelector((state: RootState) => state.s3Client);
-    const isAuthenticated = useMemo(() => {
-        if (!config) {
-            return false
-        }
-        return S3ClientSingleton.getInstance(config);
-    }, [config]);
+    const isAuthenticated = useS3Auth();
     const { data, error, isLoading, refetch } = useGetFilesQuery({}, {skip: !isAuthenticated});
 
     useEffect(() => {
@@ -34,6 +29,8 @@ const DirectoryPanel: FC = () => {
     }
 
     const onLogoutIconClick = () => {
+        S3ClientSingleton.clearInstance();
+        dispatch(clearContent());
         dispatch(clearS3ClientConfig());
     }
 

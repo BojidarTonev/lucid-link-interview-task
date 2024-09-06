@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import InputField from "../../input-field/InputField.tsx";
 import Button from "../../button/Button.tsx";
-import S3ClientSingleton from "../../../s3ClientSingleton.ts";
+import S3ClientSingleton from "../../../s3-client-singleton.ts";
 import ErrorText from "../../error-text/error-text.tsx";
 import {closeModal} from "../../../redux/features/modalSlice.ts";
 import {setS3ClientConfig} from "../../../redux/features/s3ClientSlice.ts";
@@ -38,12 +38,12 @@ const AuthModal = () => {
         try {
             S3ClientSingleton.getInstance({ accessKeyId, secretAccessKey, region: regionName, bucketName });
             setErrorText('');
-            dispatch(setS3ClientConfig({ accessKeyId, secretAccessKey, bucketName, regionName }));
+            dispatch(setS3ClientConfig({ accessKeyId, secretAccessKey, bucketName, region: regionName }));
             dispatch(closeModal());
             console.log('Login successful!');
         } catch {
             setErrorText('Login failed! Check your credentials');
-            console.error('Login failed!')
+            console.error('Login failed!');
         }
         setFormData(INITIAL_DATA);
     }
