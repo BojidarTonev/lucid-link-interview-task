@@ -8,8 +8,7 @@
 .split-screen-right {
     flex: 1;
     box-sizing: border-box;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .split-screen-left {

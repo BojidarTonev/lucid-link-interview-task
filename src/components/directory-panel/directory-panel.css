@@ -1,5 +1,6 @@
 .directory-wrapper {
     display: flex;
+    height: 100%;
     flex-direction: column;
 }
 
@@ -25,9 +26,12 @@
 }
 
 .directory-wrapper .directory-content {
-    width: 100%;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: 30px 40px;
 }
 
 .not-logged-in-wrapper {

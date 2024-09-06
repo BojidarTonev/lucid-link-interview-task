@@ -91,7 +91,7 @@ const TreeNode: FC<ITReeNodeProps> = ({ node, label, fullPath }) => {
                         ))}
 
                     {node.files && node.files.length > 0 && (
-                        <>
+                        <ul>
                             {node.files.map((fileName: string, index: number) => {
                                 const isSelectedFile = selectedFileName === `${fullPath}${fileName}`.replace(/^\//, '');
                                 return (
@@ -105,7 +105,7 @@ const TreeNode: FC<ITReeNodeProps> = ({ node, label, fullPath }) => {
                                     </li>
                                 )
                             })}
-                        </>
+                        </ul>
                     )}
                 </ul>
             )}
