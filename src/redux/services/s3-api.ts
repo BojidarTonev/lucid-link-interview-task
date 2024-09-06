@@ -7,6 +7,7 @@ import {getS3ClientAndConfig} from "../../utils/s3-utils.ts";
 export const s3Api = createApi({
     reducerPath: 's3Api',
     baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+    tagTypes: ['files'],
     endpoints: (builder) => ({
         getFiles: builder.query<any, void>({
             queryFn: async (_, { getState }) => {
@@ -22,6 +23,7 @@ export const s3Api = createApi({
                     return { error: err?.message };
                 }
             },
+            providesTags: ['files']
         }),
         getFileContent: builder.query<any, any>({
             queryFn: async (key, api) => {
@@ -66,6 +68,7 @@ export const s3Api = createApi({
                     return { error: err?.message };
                 }
             },
+            invalidatesTags: ['files']
         }),
         uploadDirectory: builder.mutation<any, {directoryName: string}>({
             queryFn: async ({ directoryName }, { getState }) => {
@@ -85,6 +88,7 @@ export const s3Api = createApi({
                     return { error: err?.message };
                 }
             },
+            invalidatesTags: ['files']
         }),
         deleteFile: builder.mutation<any, { fileName: string }>({
             queryFn: async ({ fileName }, { getState }) => {
@@ -102,6 +106,7 @@ export const s3Api = createApi({
                     return { error: err?.message };
                 }
             },
+            invalidatesTags: ['files']
         }),
     })
 });
