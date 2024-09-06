@@ -29,7 +29,6 @@
 
     .split-screen-left,
     .split-screen-right {
-        padding: 20px 0;
         flex: 1;
     }
 
