@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import './SplitScreen.css';
+import './split-screen.css';
 
 interface ISplitScreenProps {
     left: ReactNode;

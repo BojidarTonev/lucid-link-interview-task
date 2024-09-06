@@ -1,4 +1,4 @@
-import './Button.css';
+import './button.css';
 
 interface IButtonProps {
     onClick: () => Promise<void> | void,

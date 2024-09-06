@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import {IS3Credentials} from '../redux/features/s3ClientSlice';
+import {IS3Credentials} from '../redux/features/s3-client-slice.ts';
 import {useAppSelector} from "../redux/store.ts";
 import S3ClientSingleton from "../s3-client-singleton.ts";
 

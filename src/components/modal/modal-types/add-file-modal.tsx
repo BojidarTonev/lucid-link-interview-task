@@ -1,10 +1,10 @@
 import {useState} from "react";
-import InputField from "../../input-field/InputField.tsx";
-import Button from "../../button/Button.tsx";
+import InputField from "../../input-field/input-field.tsx";
+import Button from "../../button/button.tsx";
 import {useUploadFileMutation} from "../../../redux/services/s3-api.ts";
-import Loader from "../../loader/Loader.tsx";
+import Loader from "../../loader/loader.tsx";
 import ErrorText from "../../error-text/error-text.tsx";
-import {closeModal} from "../../../redux/features/modalSlice.ts";
+import {closeModal} from "../../../redux/features/modal-slice.ts";
 import {useAppDispatch, useAppSelector} from "../../../redux/store.ts";
 
 const AddFileModal = () => {

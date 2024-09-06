@@ -1,6 +1,6 @@
 import {useState} from "react";
-import InputField from "../../input-field/InputField.tsx";
-import Button from "../../button/Button.tsx";
+import InputField from "../../input-field/input-field.tsx";
+import Button from "../../button/button.tsx";
 
 const AddDirectoryModal = () => {
     const [directoryName, setDirectoryName] = useState<string>('');

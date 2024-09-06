@@ -1,17 +1,17 @@
 import {FC, useCallback, useEffect} from 'react';
 import {useGetFilesQuery} from "../../redux/services/s3-api.ts";
-import TreeView from "../tree-view/TreeView.tsx";
-import Loader from "../loader/Loader.tsx";
+import TreeView from "../tree-view/tree-view.tsx";
+import Loader from "../loader/loader.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
-import Button from "../button/Button.tsx";
-import {ModalTypes, openModal} from "../../redux/features/modalSlice.ts";
-import {clearS3ClientConfig} from "../../redux/features/s3ClientSlice.ts";
+import Button from "../button/button.tsx";
+import {ModalTypes, openModal} from "../../redux/features/modal-slice.ts";
+import {clearS3ClientConfig} from "../../redux/features/s3-client-slice.ts";
 import useS3Auth from "../../hooks/use-s3-auth.ts";
 import S3ClientSingleton from "../../s3-client-singleton.ts";
-import {clearContent} from "../../redux/features/fileContentSlice.ts";
+import {clearFileContent} from "../../redux/features/file-content-slice.ts";
 import {useAppDispatch} from "../../redux/store.ts";
-import './DirectoryPanel.css';
+import './directory-panel.css';
 
 const DirectoryPanel: FC = () => {
     const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ const DirectoryPanel: FC = () => {
 
     const onLogoutIconClick = () => {
         S3ClientSingleton.clearInstance();
-        dispatch(clearContent());
+        dispatch(clearFileContent());
         dispatch(clearS3ClientConfig());
     }
 

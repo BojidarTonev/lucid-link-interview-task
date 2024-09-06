@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {ListObjectsCommand, GetObjectCommand, PutObjectCommand, DeleteObjectCommand} from '@aws-sdk/client-s3';
-import {setContent, setError, setLoading} from "../features/fileContentSlice.ts";
+import {setContent, setError, setLoading} from "../features/file-content-slice.ts";
 import {readStreamToText, transformFilesToTreeStructure} from "../../utils/utils.ts";
 import {getS3ClientAndConfig} from "../../utils/s3-utils.ts";
 
@@ -49,6 +49,7 @@ export const s3Api = createApi({
                     return { error: err?.message };
                 }
             },
+            providesTags: ['files']
         }),
         uploadFile: builder.mutation<any, {fileName: string, fileContent: string}>({
             queryFn: async ({ fileName, fileContent }, { getState }) => {

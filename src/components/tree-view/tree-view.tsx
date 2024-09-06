@@ -1,11 +1,16 @@
 import {FC, MouseEvent, useState} from "react";
-import {setDeleteFileName, setSelectedFileName, setUploadFileDirectory} from "../../redux/features/fileContentSlice.ts";
+import {
+    clearFileContent,
+    setDeleteFileName,
+    setSelectedFileName,
+    setUploadFileDirectory
+} from "../../redux/features/file-content-slice.ts";
 import {useLazyGetFileContentQuery} from "../../redux/services/s3-api.ts";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleDown, faAngleRight, faFolderPlus, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
-import {ModalTypes, openModal} from "../../redux/features/modalSlice.ts";
+import {ModalTypes, openModal} from "../../redux/features/modal-slice.ts";
 import {useAppDispatch, useAppSelector} from "../../redux/store.ts";
-import './TreeView.css';
+import './tree-view.css';
 
 interface ITreeViewProps {
     data: any
@@ -51,6 +56,10 @@ const TreeNode: FC<ITReeNodeProps> = ({ node, label, fullPath }) => {
         e.stopPropagation();
         const fileFullName = `${fullPath}${fileName}`.replace(/^\//, '');
 
+        const isDeleteFileSelected = fileFullName === selectedFileName;
+        if (isDeleteFileSelected) {
+            dispatch(clearFileContent())
+        }
         dispatch(setDeleteFileName(fileFullName));
         dispatch(openModal({
             title: 'ARE YOU SURE YOU WANT TO DELETE FILE:',

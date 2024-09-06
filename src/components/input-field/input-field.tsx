@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import './InputField.css';
+import './input-field.css';
 
 interface IInputProps {
     label: string;

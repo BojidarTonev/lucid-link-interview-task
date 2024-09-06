@@ -34,7 +34,7 @@ const fileContentSlice = createSlice({
         setUploadFileDirectory: (state, action: PayloadAction<string>) => {
             state.uploadFileDirectory = action.payload;
         },
-        clearContent: (state) => {
+        clearFileContent: (state) => {
             state.content = '';
             state.selectedFileName = '';
             state.deleteFileName = '';
@@ -50,7 +50,7 @@ export const {
     setContent,
     setError,
     setSelectedFileName,
-    clearContent,
+    clearFileContent,
     setDeleteFileName,
     setUploadFileDirectory
 } = fileContentSlice.actions;

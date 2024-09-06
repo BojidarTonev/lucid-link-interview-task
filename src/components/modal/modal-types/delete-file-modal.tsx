@@ -1,8 +1,8 @@
-import Button from "../../button/Button.tsx";
-import {closeModal} from "../../../redux/features/modalSlice.ts";
+import Button from "../../button/button.tsx";
+import {closeModal} from "../../../redux/features/modal-slice.ts";
 import {useAppDispatch, useAppSelector} from "../../../redux/store.ts";
 import {useDeleteFileMutation} from "../../../redux/services/s3-api.ts";
-import Loader from "../../loader/Loader.tsx";
+import Loader from "../../loader/loader.tsx";
 import ErrorText from "../../error-text/error-text.tsx";
 
 const DeleteFileModal = () => {

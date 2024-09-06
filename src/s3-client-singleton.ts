@@ -1,5 +1,5 @@
 import { S3Client } from '@aws-sdk/client-s3';
-import {IS3Credentials} from "./redux/features/s3ClientSlice.ts";
+import {IS3Credentials} from "./redux/features/s3-client-slice.ts";
 
 
 class S3ClientSingleton {
@@ -24,7 +24,7 @@ class S3ClientSingleton {
             }
             return S3ClientSingleton.instance;
         } else if (!S3ClientSingleton.instance) {
-            // throw new Error('S3Client configuration is not set. Please provide configuration.');
+            throw new Error('S3Client configuration is not set. Please provide configuration.');
         }
         return S3ClientSingleton.instance;
     }

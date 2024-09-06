@@ -1,10 +1,10 @@
 import {useState} from "react";
-import InputField from "../../input-field/InputField.tsx";
-import Button from "../../button/Button.tsx";
+import InputField from "../../input-field/input-field.tsx";
+import Button from "../../button/button.tsx";
 import S3ClientSingleton from "../../../s3-client-singleton.ts";
 import ErrorText from "../../error-text/error-text.tsx";
-import {closeModal} from "../../../redux/features/modalSlice.ts";
-import {setS3ClientConfig} from "../../../redux/features/s3ClientSlice.ts";
+import {closeModal} from "../../../redux/features/modal-slice.ts";
+import {setS3ClientConfig} from "../../../redux/features/s3-client-slice.ts";
 import {useAppDispatch} from "../../../redux/store.ts";
 
 interface IAuthFormData {

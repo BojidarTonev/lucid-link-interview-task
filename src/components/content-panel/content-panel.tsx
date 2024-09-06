@@ -1,10 +1,10 @@
 import {FC, useCallback} from 'react';
 import {useAppSelector} from "../../redux/store.ts";
-import Loader from "../loader/Loader.tsx";
+import Loader from "../loader/loader.tsx";
 import LucidLinkLogo from '/lucidlink-logo.png';
 import ErrorText from "../error-text/error-text.tsx";
 import useS3Auth from "../../hooks/use-s3-auth.ts";
-import './ContentPanel.css';
+import './content-panel.css';
 
 const ContentPanel: FC = () => {
     const isAuthenticated = useS3Auth();
@@ -12,7 +12,7 @@ const ContentPanel: FC = () => {
 
     const renderContentPanelContent = useCallback(() => {
         if (error) {
-            return <ErrorText text="Error loading content data. Please try again!"/>
+            return <ErrorText text="Error loading content data. Please try again!" hasBackground />
         }
         if (loading) {
             return <Loader />

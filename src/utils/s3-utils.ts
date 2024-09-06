@@ -1,5 +1,5 @@
 import S3ClientSingleton from "../s3-client-singleton.ts";
-import { IS3Credentials } from "../redux/features/s3ClientSlice.ts";
+import { IS3Credentials } from "../redux/features/s3-client-slice.ts";
 
 export const getS3ClientAndConfig = (getState: () => any) => {
     const state = getState();

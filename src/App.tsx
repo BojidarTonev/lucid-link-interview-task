@@ -1,7 +1,7 @@
-import SplitScreen from "./components/split-screen/SplitScreen.tsx";
-import DirectoryPanel from "./components/directory-panel/DirectoryPanel.tsx";
-import ContentPanel from "./components/content-panel/ContentPanel.tsx";
-import Modal from "./components/modal/Modal.tsx";
+import SplitScreen from "./components/split-screen/split-screen.tsx";
+import DirectoryPanel from "./components/directory-panel/directory-panel.tsx";
+import ContentPanel from "./components/content-panel/content-panel.tsx";
+import Modal from "./components/modal/modal.tsx";
 import './App.css'
 
 function App() {
