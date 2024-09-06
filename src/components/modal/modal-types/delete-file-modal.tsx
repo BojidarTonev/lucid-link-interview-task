@@ -30,7 +30,7 @@ const DeleteFileModal = () => {
 
     return(<div className="modal-content-wrapper">
         { isError && <ErrorText text="Error deleting item!" />}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '60%'}}>
+        <div className={`${isLoading ? '' : 'delete-modal-buttons'}`}>
             { isLoading ?
                 <Loader /> :
                 <>

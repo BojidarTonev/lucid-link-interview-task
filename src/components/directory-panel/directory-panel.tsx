@@ -11,6 +11,7 @@ import useS3Auth from "../../hooks/use-s3-auth.ts";
 import S3ClientSingleton from "../../s3-client-singleton.ts";
 import {clearFileContent} from "../../redux/features/file-content-slice.ts";
 import {useAppDispatch} from "../../redux/store.ts";
+import ErrorText from "../error-text/error-text.tsx";
 import './directory-panel.css';
 
 const DirectoryPanel: FC = () => {
@@ -42,7 +43,7 @@ const DirectoryPanel: FC = () => {
             </div>
         }
         if (error) {
-            return <div>Error loading files data. Please try again!</div>
+            return <ErrorText text="Error loading files data. Please try again!" />
         }
         if (isLoading) {
             return <Loader />

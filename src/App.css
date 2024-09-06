@@ -3,8 +3,3 @@
   width: 100vw;
   background-color: var(--background-color);
 }
-
-.auth-modal-btn {
-  margin-top: 10px;
-  align-self: center;
-}

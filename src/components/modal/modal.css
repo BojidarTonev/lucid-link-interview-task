@@ -85,6 +85,21 @@
     height: 200px;
 }
 
+.auth-modal-btn {
+    margin-top: 10px;
+    align-self: center;
+}
+
+.delete-modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+}
+
+.delete-modal-buttons-loading {
+}
+
 @media (max-width: 450px) {
     .modal-title {
         font-size: var(--fs-small);
