@@ -6,8 +6,8 @@ import AuthModal from "./modal-types/auth-modal.tsx";
 import AddDirectoryModal from "./modal-types/add-directory-modal.tsx";
 import AddFileModal from "./modal-types/add-file-modal.tsx";
 import DeleteFileModal from "./modal-types/delete-file-modal.tsx";
-import './modal.css';
 import {useAppDispatch, useAppSelector} from "../../redux/store.ts";
+import './modal.css';
 
 const Modal = (): ReactNode | null => {
     const dispatch = useAppDispatch();

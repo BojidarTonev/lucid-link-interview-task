@@ -1,7 +1,13 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {ListObjectsCommand, GetObjectCommand, PutObjectCommand, DeleteObjectCommand} from '@aws-sdk/client-s3';
+import {
+    ListObjectsCommand,
+    GetObjectCommand,
+    PutObjectCommand,
+    DeleteObjectCommand,
+    PutObjectCommandOutput, DeleteObjectCommandOutput
+} from '@aws-sdk/client-s3';
 import {setContent, setError, setLoading} from "../features/file-content-slice.ts";
-import {readStreamToText, transformFilesToTreeStructure} from "../../utils/utils.ts";
+import {IFileStructure, readStreamToText, transformFilesToTreeStructure} from "../../utils/utils.ts";
 import {getS3ClientAndConfig} from "../../utils/s3-utils.ts";
 
 export const s3Api = createApi({
@@ -9,7 +15,7 @@ export const s3Api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: '/' }),
     tagTypes: ['files'],
     endpoints: (builder) => ({
-        getFiles: builder.query<any, void>({
+        getFiles: builder.query<IFileStructure, {}>({
             queryFn: async (_, { getState }) => {
                 try {
                     const { s3Client, bucketName } = getS3ClientAndConfig(() => getState());
@@ -25,7 +31,7 @@ export const s3Api = createApi({
             },
             providesTags: ['files']
         }),
-        getFileContent: builder.query<any, any>({
+        getFileContent: builder.query<string, any>({
             queryFn: async (key, api) => {
                 api.dispatch(setLoading(true));
                 try {
@@ -51,7 +57,7 @@ export const s3Api = createApi({
             },
             providesTags: ['files']
         }),
-        uploadFile: builder.mutation<any, {fileName: string, fileContent: string}>({
+        uploadFile: builder.mutation<PutObjectCommandOutput, {fileName: string, fileContent: string}>({
             queryFn: async ({ fileName, fileContent }, { getState }) => {
                 try {
                     const { s3Client, bucketName } = getS3ClientAndConfig(() => getState());
@@ -71,7 +77,7 @@ export const s3Api = createApi({
             },
             invalidatesTags: ['files']
         }),
-        uploadDirectory: builder.mutation<any, {directoryName: string}>({
+        uploadDirectory: builder.mutation<PutObjectCommandOutput, {directoryName: string}>({
             queryFn: async ({ directoryName }, { getState }) => {
                 try {
                     const { s3Client, bucketName } = getS3ClientAndConfig(() => getState());
@@ -91,10 +97,10 @@ export const s3Api = createApi({
             },
             invalidatesTags: ['files']
         }),
-        deleteFile: builder.mutation<any, { fileName: string }>({
+        deleteFile: builder.mutation<DeleteObjectCommandOutput, { fileName: string }>({
             queryFn: async ({ fileName }, { getState }) => {
                 try {
-                    const { s3Client, bucketName } = getS3ClientAndConfig(() => getState() as any);
+                    const { s3Client, bucketName } = getS3ClientAndConfig(() => getState());
 
                     const command = new DeleteObjectCommand({
                         Bucket: bucketName,

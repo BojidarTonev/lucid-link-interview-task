@@ -10,14 +10,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleDown, faAngleRight, faFolderPlus, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {ModalTypes, openModal} from "../../redux/features/modal-slice.ts";
 import {useAppDispatch, useAppSelector} from "../../redux/store.ts";
+import {IFileStructure} from "../../utils/utils.ts";
 import './tree-view.css';
 
 interface ITreeViewProps {
-    data: any
+    data: IFileStructure
 }
 
 interface ITReeNodeProps {
-    node: any,
+    node: IFileStructure,
     label: string,
     fullPath: string
 }
@@ -88,9 +89,9 @@ const TreeNode: FC<ITReeNodeProps> = ({ node, label, fullPath }) => {
                         .map(([key, value]) => (
                             <TreeNode
                                 key={key}
-                                node={value}
+                                node={value as IFileStructure}
                                 label={key}
-                                fullPath={value.path}
+                                fullPath={(value as IFileStructure).path}
                             />
                         ))}
 

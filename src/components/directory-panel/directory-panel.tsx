@@ -47,6 +47,9 @@ const DirectoryPanel: FC = () => {
         if (isLoading) {
             return <Loader />
         }
+        if (!data) {
+            return <div>Empty directory</div>
+        }
 
         return <TreeView data={data} />
     }, [data, error, isLoading, isAuthenticated]);

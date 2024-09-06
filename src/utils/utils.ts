@@ -1,11 +1,11 @@
-interface ITestStructure {
+export interface IFileStructure {
     files: string[],
     path: string,
-    [key: string]: ITestStructure | string[] | string;
+    [key: string]: IFileStructure | string[] | string;
 }
 
 const transformFilesToTreeStructure = (filesArray: string[]) => {
-    return filesArray.reduce((acc: ITestStructure, filePath: string) => {
+    return filesArray.reduce((acc: IFileStructure, filePath: string) => {
         const parts = filePath.split('/');
         let currentLevel = acc;
 
@@ -17,7 +17,7 @@ const transformFilesToTreeStructure = (filesArray: string[]) => {
                 currentLevel.files.push(part);
             } else {
                 currentLevel[part] = currentLevel[part] || { files: [], path: `${(currentLevel.path || '')}${part}/` };
-                currentLevel = currentLevel[part] as ITestStructure;
+                currentLevel = currentLevel[part] as IFileStructure;
             }
         });
 
