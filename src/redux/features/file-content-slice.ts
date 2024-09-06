@@ -9,7 +9,7 @@ const initialState = {
     uploadFileDirectory: ''
 };
 
-const fileContentSlice = createSlice({
+export const fileContentSlice = createSlice({
     name: 'fileContent',
     initialState,
     reducers: {

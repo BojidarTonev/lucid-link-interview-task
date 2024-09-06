@@ -27,7 +27,7 @@ const initialState: ModalState = {
     modalType: null,
 };
 
-const modalSlice = createSlice({
+export const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
