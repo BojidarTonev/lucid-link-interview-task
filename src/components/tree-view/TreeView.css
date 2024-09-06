@@ -61,6 +61,15 @@
     transition: all .2s ease-in-out;
 }
 
+.file-name-wrapper svg {
+    margin-right: 20px;
+    transition: all .2s ease-in-out;
+}
+
+.file-name-wrapper svg:hover {
+    filter: brightness(1.5) contrast(1.5) saturate(1.5) drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
+}
+
 .file-name-wrapper:hover {
     color: #b0fb16;
     transform: scale(1.05);

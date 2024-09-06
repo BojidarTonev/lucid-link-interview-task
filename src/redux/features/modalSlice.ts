@@ -3,7 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export enum ModalTypes {
     AuthModal = 'AuthModal',
     AddFileModal = 'AddFileModal',
-    AddDirectoryModal = 'AddDirectoryModal'
+    AddDirectoryModal = 'AddDirectoryModal',
+    DeleteFileModal = 'DeleteFileModal',
 }
 
 interface IOpenModalActionProps {

@@ -7,6 +7,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import AuthModal from "./modal-types/auth-modal.tsx";
 import AddDirectoryModal from "./modal-types/add-directory-modal.tsx";
 import AddFileModal from "./modal-types/add-file-modal.tsx";
+import DeleteFileModal from "./modal-types/delete-file-modal.tsx";
 import './Modal.css';
 
 const Modal = (): ReactNode | null => {
@@ -21,6 +22,8 @@ const Modal = (): ReactNode | null => {
                 return <AddDirectoryModal />;
             case ModalTypes.AddFileModal:
                 return <AddFileModal />;
+            case ModalTypes.DeleteFileModal:
+                return <DeleteFileModal />
             default:
                 return <div/>;
         }
