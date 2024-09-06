@@ -1,7 +1,16 @@
 :root {
+    /* colors */
     --active-color: #b0fb16;
     --white-color: #fff;
     --background-color: #242424;
     --background-color-darker: #181818;
     --error-color: #d80b0b;
+
+    /* font sizes */
+    --fs-extra-small: 12px;
+    --fs-small: 16px;
+    --fs-medium: 18px;
+    --fs-large: 20px;
+    --fs-extra-large: 22px;
+    --fs-2-extra-large: 32px;
 }

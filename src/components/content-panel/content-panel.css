@@ -5,7 +5,7 @@
 }
 
 .content-wrapper .title {
-    font-size: 32px;
+    font-size: var(--fs-2-extra-large);
     font-weight: 700;
     border-bottom: 2px solid #b0fb16;
     display: flex;
@@ -55,7 +55,7 @@
 }
 
 .file-content-container .text-content {
-    font-size: 18px;
+    font-size: var(--fs-medium);
     padding: 5px 10px;
     margin: 0 20px;
     background-color: rgba(0, 0, 0, 0.8);
@@ -91,10 +91,10 @@
 
 @media (max-width: 555px) {
     .content-wrapper .title {
-        font-size: 22px;
+        font-size: var(--fs-ex4);
     }
 
     .content-wrapper .text-content {
-        font-size: 12px;
+        font-size: var(--fs-extra-small);;
     }
 }

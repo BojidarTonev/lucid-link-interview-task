@@ -11,7 +11,7 @@
     border: 2px solid #62626c;
     border-radius: 8px;
     color: var(--white-color);
-    font-size: 16px;
+    font-size: var(--fs-small);
     transition: border-color 0.3s ease;
 }
 
@@ -23,7 +23,7 @@
 
 .lucid-label {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: var(--fs-small);
     font-weight: 600;
     color: var(--white-color);
     cursor: pointer;
@@ -34,6 +34,6 @@
 .lucid-input:not(:placeholder-shown) + .lucid-label {
     top: -10px;
     left: 8px;
-    font-size: 12px;
+    font-size: var(--fs-extra-small);
     color: #3498db; /* Blue color for label on focus */
 }
