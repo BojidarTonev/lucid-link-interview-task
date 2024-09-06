@@ -51,4 +51,7 @@
     .file-name-wrapper {
         font-size: 12px;
     }
+    .directory-wrapper .title {
+        font-size: 22px;
+    }
 }

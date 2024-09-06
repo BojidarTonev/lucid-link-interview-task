@@ -77,3 +77,13 @@
         width: 300px;
     }
 }
+
+@media (max-width: 555px) {
+    .content-wrapper .title {
+        font-size: 22px;
+    }
+
+    .content-wrapper .text-content {
+        font-size: 12px;
+    }
+}
