@@ -59,6 +59,7 @@
     padding: 5px 10px;
     margin: 0 20px;
     background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
     overflow-wrap: break-word;
     word-break: break-word;
     white-space: normal;
@@ -91,7 +92,7 @@
 
 @media (max-width: 555px) {
     .content-wrapper .title {
-        font-size: var(--fs-ex4);
+        font-size: var(--fs-extra-large);
     }
 
     .content-wrapper .text-content {

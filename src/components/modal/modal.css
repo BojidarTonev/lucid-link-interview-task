@@ -19,6 +19,10 @@
     visibility: visible;
 }
 
+.modal-overlay.fade-in .modal-content {
+    transform: translateY(0);
+}
+
 .modal-overlay.fade-out {
     opacity: 0;
     visibility: hidden;
@@ -33,6 +37,8 @@
     position: relative;
     min-width: 300px;
     max-width: 500px;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
 }
 
 .modal-title {
