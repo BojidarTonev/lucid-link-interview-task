@@ -7,10 +7,11 @@
 .content-wrapper .title {
     font-size: 32px;
     font-weight: 700;
-    padding-bottom: 3px;
     border-bottom: 2px solid #b0fb16;
     display: flex;
     align-items: center;
+    padding: 5px 20px;
+    background-color: var(--background-color-darker);
 }
 
 .content-wrapper .file-content-container {
@@ -39,7 +40,7 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    color: #b0fb16;
+    color: var(--active-color);
     font-weight: 500;
 }
 
@@ -56,7 +57,7 @@
 .file-content-container .text-content {
     font-size: 18px;
     padding: 5px 10px;
-    margin: 0 20px 0 0;
+    margin: 0 20px;
     background-color: rgba(0, 0, 0, 0.8);
     overflow-wrap: break-word;
     word-break: break-word;

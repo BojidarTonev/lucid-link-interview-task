@@ -15,7 +15,7 @@
 .line {
     width: 5px;
     height: 15px;
-    background-color: #b0fb16;
+    background-color: var(--active-color);
     animation: scale 0.8s infinite ease-in-out;
 }
 

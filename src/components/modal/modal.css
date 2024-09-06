@@ -27,7 +27,7 @@
 .modal-content {
     display: flex;
     flex-direction: column;
-    background: #181818;
+    background: var(--background-color);
     padding: 20px;
     border-radius: 8px;
     position: relative;
@@ -57,7 +57,7 @@
 }
 
 .modal-title div {
-    color: #b0fb16;
+    color: var(--active-color);
     font-size: 18px;
     font-weight: 700;
 }
@@ -71,7 +71,7 @@
 }
 
 .close-modal-icon:hover {
-    color: #b0fb16;
+    color: var(--active-color);
     transform: scale(1.1);
 }
 

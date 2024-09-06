@@ -1,5 +1,5 @@
 .lucid-primary {
-    background-color: #b0fb16 !important;
+    background-color: var(--active-color) !important;
     color: black !important;
     border: 1px solid black !important;
     transition: all 0.3s;
@@ -10,18 +10,18 @@
 .lucid-link-button {
     border-radius: 80px;
     border: 1px solid #fff;
-    color: #fff;
+    color: var(--white-color);
     padding: 0.6em 1.2em;
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: #181818;
+    background-color: var(--background-color);
     cursor: pointer;
     align-self: center;
     margin: 10px 0;
     transition: all 0.3s;
 }
 .lucid-link-button:hover {
-    background-color: #fff;
+    background-color: var(--white-color);
     color: black;
 }
