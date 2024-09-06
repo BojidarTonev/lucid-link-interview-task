@@ -5,7 +5,8 @@ const initialState = {
     loading: false,
     error: null,
     selectedFileName: '',
-    deleteFileName: ''
+    deleteFileName: '',
+    uploadFileDirectory: ''
 };
 
 const fileContentSlice = createSlice({
@@ -30,16 +31,28 @@ const fileContentSlice = createSlice({
         setDeleteFileName: (state, action: PayloadAction<string>) => {
             state.deleteFileName = action.payload
         },
+        setUploadFileDirectory: (state, action: PayloadAction<string>) => {
+            state.uploadFileDirectory = action.payload;
+        },
         clearContent: (state) => {
             state.content = '';
             state.selectedFileName = '';
-            state.deleteFileName = '',
+            state.deleteFileName = '';
+            state.uploadFileDirectory = '';
             state.error = null;
             state.loading = false;
         },
     },
 });
 
-export const { setLoading, setContent, setError, setSelectedFileName, clearContent, setDeleteFileName } = fileContentSlice.actions;
+export const {
+    setLoading,
+    setContent,
+    setError,
+    setSelectedFileName,
+    clearContent,
+    setDeleteFileName,
+    setUploadFileDirectory
+} = fileContentSlice.actions;
 
 export default fileContentSlice.reducer;

@@ -1,5 +1,5 @@
 import {FC, MouseEvent, useState} from "react";
-import {setDeleteFileName, setSelectedFileName} from "../../redux/features/fileContentSlice.ts";
+import {setDeleteFileName, setSelectedFileName, setUploadFileDirectory} from "../../redux/features/fileContentSlice.ts";
 import {useLazyGetFileContentQuery} from "../../redux/services/s3-api.ts";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleDown, faAngleRight, faFolderPlus, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
@@ -34,9 +34,10 @@ const TreeNode: FC<ITReeNodeProps> = ({ node, label, fullPath }) => {
         dispatch(setSelectedFileName(fullFilePath));
     };
 
-    const onAddElementClick = (e: MouseEvent<SVGSVGElement>) => {
+    const onAddElementClick = (e: MouseEvent<SVGSVGElement>, directory: string) => {
         e.stopPropagation();
 
+        dispatch(setUploadFileDirectory(directory));
         dispatch(openModal({title: 'ADD FILE TO:', subTitle: fullPath, modalType: ModalTypes.AddFileModal}));
     }
 
@@ -50,7 +51,7 @@ const TreeNode: FC<ITReeNodeProps> = ({ node, label, fullPath }) => {
         e.stopPropagation();
         const fileFullName = `${fullPath}${fileName}`.replace(/^\//, '');
 
-        dispatch(setDeleteFileName(fileFullName))
+        dispatch(setDeleteFileName(fileFullName));
         dispatch(openModal({
             title: 'ARE YOU SURE YOU WANT TO DELETE FILE:',
             subTitle: fileFullName,
@@ -66,7 +67,7 @@ const TreeNode: FC<ITReeNodeProps> = ({ node, label, fullPath }) => {
                 </span>}
                 <span>{label}</span>
                 <div className="outer-list-operations">
-                    <FontAwesomeIcon icon={faPlus} onClick={onAddElementClick} />
+                    <FontAwesomeIcon icon={faPlus} onClick={(e) => onAddElementClick(e, fullPath)} />
                     <FontAwesomeIcon icon={faFolderPlus} onClick={onAddDirectoryClick} />
                 </div>
             </div>

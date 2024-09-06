@@ -5,17 +5,19 @@ import {useUploadFileMutation} from "../../../redux/services/s3-api.ts";
 import Loader from "../../loader/Loader.tsx";
 import ErrorText from "../../error-text/error-text.tsx";
 import {closeModal} from "../../../redux/features/modalSlice.ts";
-import {useAppDispatch} from "../../../redux/store.ts";
+import {useAppDispatch, useAppSelector} from "../../../redux/store.ts";
 
 const AddFileModal = () => {
     const dispatch = useAppDispatch();
+    const { uploadFileDirectory } = useAppSelector((state) => state.fileContent)
     const [uploadFile, { isLoading, isError }] = useUploadFileMutation();
     const [fileName, setFileName] = useState<string>('');
     const [fileContent, setFileContent] = useState<string>('');
 
     const onAddFileSubmitButtonClick = async () => {
+        const fileFullName = `${uploadFileDirectory}${fileName}`.replace(/^\//, '');
         try {
-            await uploadFile({ fileName, fileContent }).unwrap();
+            await uploadFile({ fileName: fileFullName, fileContent }).unwrap();
             dispatch(closeModal());
         } catch (err) {
             console.error('Error uploading file! => ', err);
