@@ -15,7 +15,7 @@ export const s3Api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: '/' }),
     tagTypes: ['files'],
     endpoints: (builder) => ({
-        getFiles: builder.query<IFileStructure, {}>({
+        getFiles: builder.query<IFileStructure, object>({
             queryFn: async (_, { getState }) => {
                 try {
                     const { s3Client, bucketName } = getS3ClientAndConfig(() => getState());
@@ -55,7 +55,6 @@ export const s3Api = createApi({
                     return { error: err?.message };
                 }
             },
-            providesTags: ['files']
         }),
         uploadFile: builder.mutation<PutObjectCommandOutput, {fileName: string, fileContent: string}>({
             queryFn: async ({ fileName, fileContent }, { getState }) => {
