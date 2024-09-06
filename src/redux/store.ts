@@ -5,9 +5,10 @@ import fileContentReducer from './features/fileContentSlice.ts';
 import modalReducer from './features/modalSlice.ts';
 import s3ClientReducer, {s3ClientSlice} from './features/s3ClientSlice.ts';
 import storage from 'redux-persist/lib/storage';
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 
 const s3ClientPersistConfig = {
-    key: 's3Client',
+    key: s3ClientSlice.name,
     storage,
     whitelist: [s3ClientSlice.name],
 };
@@ -19,18 +20,30 @@ export const store = configureStore({
         // slices
         fileContent: fileContentReducer,
         modal: modalReducer,
-        s3Client: persistedS3ClientReducer,
+        [s3ClientSlice.name]: persistedS3ClientReducer,
         // services
         [s3Api.reducerPath]: s3Api.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
-                ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'], // Prevent warnings with redux-persist
+                ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
             },
         }).concat(s3Api.middleware),
 });
 
 export const persistor = persistStore(store);
 
-export type RootState = ReturnType<typeof store.getState>;
+type RootState = ReturnType<typeof store.getState>;
+type AppDispatch = typeof store.dispatch;
+
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+const useAppDispatch = () => useDispatch<AppDispatch>();
+
+export {
+    useAppSelector,
+    useAppDispatch,
+};
+
+export default store;

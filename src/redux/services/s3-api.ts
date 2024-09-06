@@ -1,53 +1,104 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ListObjectsCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import {ListObjectsCommand, GetObjectCommand, PutObjectCommand, DeleteObjectCommand} from '@aws-sdk/client-s3';
 import {setContent, setError, setLoading} from "../features/fileContentSlice.ts";
 import {readStreamToText, transformFilesToTreeStructure} from "../../utils/utils.ts";
-import {RootState} from "../store.ts";
 import {getS3ClientAndConfig} from "../../utils/s3-utils.ts";
 
 export const s3Api = createApi({
     reducerPath: 's3Api',
     baseQuery: fetchBaseQuery({ baseUrl: '/' }),
     endpoints: (builder) => ({
-        getFiles: builder.query({
+        getFiles: builder.query<any, void>({
             queryFn: async (_, { getState }) => {
                 try {
-                    const { s3Client, config } = getS3ClientAndConfig(() => getState() as RootState);
+                    const { s3Client, bucketName } = getS3ClientAndConfig(() => getState());
 
-                    const bucketName = config.bucketName;
-                    if (!bucketName) {
-                        return { error: 'Bucket name is not specified.' };
-                    }
                     const command = new ListObjectsCommand({ Bucket: bucketName });
                     const data = await s3Client.send(command);
                     const files = data.Contents?.map(item => item.Key ?? '') ?? [];
                     const structuredFiles = transformFilesToTreeStructure(files);
                     return { data: structuredFiles };
-                } catch (err) {
+                } catch (err: any) {
                     return { error: err?.message };
                 }
             },
         }),
-        getFileContent: builder.query({
+        getFileContent: builder.query<any, any>({
             queryFn: async (key, api) => {
                 api.dispatch(setLoading(true));
                 try {
-                    const { s3Client, config } = getS3ClientAndConfig(() => api.getState() as RootState);
+                    const { s3Client, bucketName } = getS3ClientAndConfig(() => api.getState());
 
-                    const bucketName = config.bucketName;
-                    if (!bucketName) {
-                        return { error: 'Bucket name is not specified.' };
-                    }
                     const command = new GetObjectCommand({
                         Bucket: bucketName,
                         Key: key,
                     });
                     const response = await s3Client.send(command);
                     const bodyContents = await readStreamToText(response);
+
                     api.dispatch(setContent(bodyContents));
+                    api.dispatch(setLoading(false));
+
                     return { data: bodyContents };
-                } catch (err) {
+                } catch (err: any) {
                     api.dispatch(setError(err?.message));
+                    api.dispatch(setLoading(false));
+
+                    return { error: err?.message };
+                }
+            },
+        }),
+        uploadFile: builder.mutation<any, {fileName: string, fileContent: string}>({
+            queryFn: async ({ fileName, fileContent }, { getState }) => {
+                try {
+                    const { s3Client, bucketName } = getS3ClientAndConfig(() => getState());
+
+                    const command = new PutObjectCommand({
+                        Bucket: bucketName,
+                        Key: fileName,
+                        Body: fileContent,
+                        ContentType: 'text/plain',
+                    });
+
+                    const response = await s3Client.send(command);
+                    return { data: response };
+                } catch (err: any) {
+                    return { error: err?.message };
+                }
+            },
+        }),
+        uploadDirectory: builder.mutation<any, {directoryName: string}>({
+            queryFn: async ({ directoryName }, { getState }) => {
+                try {
+                    const { s3Client, bucketName } = getS3ClientAndConfig(() => getState());
+
+                    const command = new PutObjectCommand({
+                        Bucket: bucketName,
+                        Key: directoryName,
+                        Body: '',
+                        ContentType: 'text/plain',
+                    });
+
+                    const response = await s3Client.send(command);
+                    return { data: response };
+                } catch (err: any) {
+                    return { error: err?.message };
+                }
+            },
+        }),
+        deleteFile: builder.mutation<any, { fileName: string }>({
+            queryFn: async ({ fileName }, { getState }) => {
+                try {
+                    const { s3Client, bucketName } = getS3ClientAndConfig(() => getState() as any);
+
+                    const command = new DeleteObjectCommand({
+                        Bucket: bucketName,
+                        Key: fileName,
+                    });
+
+                    const response = await s3Client.send(command);
+                    return { data: response };
+                } catch (err: any) {
                     return { error: err?.message };
                 }
             },
@@ -55,4 +106,4 @@ export const s3Api = createApi({
     })
 });
 
-export const { useGetFilesQuery, useLazyGetFileContentQuery } = s3Api;
+export const { useGetFilesQuery, useLazyGetFileContentQuery, useUploadFileMutation, useDeleteFileMutation } = s3Api;

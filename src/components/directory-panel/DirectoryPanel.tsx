@@ -2,7 +2,6 @@ import {FC, useCallback, useEffect} from 'react';
 import {useGetFilesQuery} from "../../redux/services/s3-api.ts";
 import TreeView from "../tree-view/TreeView.tsx";
 import Loader from "../loader/Loader.tsx";
-import {useDispatch} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 import Button from "../button/Button.tsx";
@@ -11,10 +10,11 @@ import {clearS3ClientConfig} from "../../redux/features/s3ClientSlice.ts";
 import useS3Auth from "../../hooks/use-s3-auth.ts";
 import S3ClientSingleton from "../../s3-client-singleton.ts";
 import {clearContent} from "../../redux/features/fileContentSlice.ts";
+import {useAppDispatch} from "../../redux/store.ts";
 import './DirectoryPanel.css';
 
 const DirectoryPanel: FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const isAuthenticated = useS3Auth();
     const { data, error, isLoading, refetch } = useGetFilesQuery({}, {skip: !isAuthenticated});
 

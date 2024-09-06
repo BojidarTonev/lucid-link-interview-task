@@ -1,11 +1,11 @@
 import {useState} from "react";
-import {useDispatch} from "react-redux";
 import InputField from "../../input-field/InputField.tsx";
 import Button from "../../button/Button.tsx";
 import S3ClientSingleton from "../../../s3-client-singleton.ts";
 import ErrorText from "../../error-text/error-text.tsx";
 import {closeModal} from "../../../redux/features/modalSlice.ts";
 import {setS3ClientConfig} from "../../../redux/features/s3ClientSlice.ts";
+import {useAppDispatch} from "../../../redux/store.ts";
 
 interface IAuthFormData {
     accessKeyId: string;
@@ -22,7 +22,7 @@ const INITIAL_DATA: IAuthFormData = {
 };
 
 const AuthModal = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [errorText, setErrorText] = useState<string>('');
     const [formData, setFormData]= useState<IAuthFormData>(INITIAL_DATA);
 

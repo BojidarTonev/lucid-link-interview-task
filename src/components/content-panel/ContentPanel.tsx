@@ -1,6 +1,5 @@
 import {FC, useCallback} from 'react';
-import {useSelector} from "react-redux";
-import {RootState} from "../../redux/store.ts";
+import {useAppSelector} from "../../redux/store.ts";
 import Loader from "../loader/Loader.tsx";
 import LucidLinkLogo from '/lucidlink-logo.png';
 import ErrorText from "../error-text/error-text.tsx";
@@ -9,7 +8,7 @@ import './ContentPanel.css';
 
 const ContentPanel: FC = () => {
     const isAuthenticated = useS3Auth();
-    const { content, loading, error, selectedFileName } = useSelector((state: RootState) => state.fileContent);
+    const { content, loading, error, selectedFileName } = useAppSelector((state) => state.fileContent);
 
     const renderContentPanelContent = useCallback(() => {
         if (error) {

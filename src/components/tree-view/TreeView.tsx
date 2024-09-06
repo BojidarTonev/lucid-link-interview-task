@@ -1,11 +1,10 @@
 import {FC, MouseEvent, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../redux/store.ts";
-import {setSelectedFileName} from "../../redux/features/fileContentSlice.ts";
+import {setDeleteFileName, setSelectedFileName} from "../../redux/features/fileContentSlice.ts";
 import {useLazyGetFileContentQuery} from "../../redux/services/s3-api.ts";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleDown, faAngleRight, faFolderPlus, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {ModalTypes, openModal} from "../../redux/features/modalSlice.ts";
+import {useAppDispatch, useAppSelector} from "../../redux/store.ts";
 import './TreeView.css';
 
 interface ITreeViewProps {
@@ -19,9 +18,9 @@ interface ITReeNodeProps {
 }
 
 const TreeNode: FC<ITReeNodeProps> = ({ node, label, fullPath }) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [trigger] = useLazyGetFileContentQuery();
-    const { selectedFileName } = useSelector((state: RootState) => state.fileContent);
+    const { selectedFileName } = useAppSelector((state) => state.fileContent);
     const [isOpen, setIsOpen] = useState(false);
 
     const isObject = node && typeof node === "object" && !Array.isArray(node);
@@ -49,10 +48,12 @@ const TreeNode: FC<ITReeNodeProps> = ({ node, label, fullPath }) => {
 
     const onDeleteElementClick = (e: MouseEvent<SVGSVGElement>, fileName: string) => {
         e.stopPropagation();
+        const fileFullName = `${fullPath}${fileName}`.replace(/^\//, '');
 
+        dispatch(setDeleteFileName(fileFullName))
         dispatch(openModal({
             title: 'ARE YOU SURE YOU WANT TO DELETE FILE:',
-            subTitle: `${fullPath}${fileName}`.replace(/^\//, ''),
+            subTitle: fileFullName,
             modalType: ModalTypes.DeleteFileModal}
         ));
     }

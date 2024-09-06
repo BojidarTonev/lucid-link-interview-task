@@ -1,7 +1,5 @@
 import {ReactNode, useCallback} from 'react';
-import {useDispatch, useSelector} from "react-redux";
 import {closeModal, ModalTypes} from "../../redux/features/modalSlice.ts";
-import {RootState} from "../../redux/store.ts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import AuthModal from "./modal-types/auth-modal.tsx";
@@ -9,10 +7,11 @@ import AddDirectoryModal from "./modal-types/add-directory-modal.tsx";
 import AddFileModal from "./modal-types/add-file-modal.tsx";
 import DeleteFileModal from "./modal-types/delete-file-modal.tsx";
 import './Modal.css';
+import {useAppDispatch, useAppSelector} from "../../redux/store.ts";
 
 const Modal = (): ReactNode | null => {
-    const dispatch = useDispatch();
-    const { isOpen, title, subTitle, modalType } = useSelector((state: RootState) => state.modal);
+    const dispatch = useAppDispatch();
+    const { isOpen, title, subTitle, modalType } = useAppSelector((state) => state.modal);
 
     const modalContent = useCallback(() => {
         switch (modalType) {

@@ -1,20 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 const initialState = {
     content: '',
     loading: false,
     error: null,
-    selectedFileName: ''
+    selectedFileName: '',
+    deleteFileName: ''
 };
 
 const fileContentSlice = createSlice({
     name: 'fileContent',
     initialState,
     reducers: {
-        setLoading: (state, action) => {
+        setLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
         },
-        setContent: (state, action) => {
+        setContent: (state, action: PayloadAction<string>) => {
             state.content = action.payload;
             state.loading = false;
             state.error = null;
@@ -23,18 +24,22 @@ const fileContentSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
-        setSelectedFileName: (state, action) => {
+        setSelectedFileName: (state, action: PayloadAction<string>) => {
             state.selectedFileName = action.payload
+        },
+        setDeleteFileName: (state, action: PayloadAction<string>) => {
+            state.deleteFileName = action.payload
         },
         clearContent: (state) => {
             state.content = '';
             state.selectedFileName = '';
+            state.deleteFileName = '',
             state.error = null;
             state.loading = false;
         },
     },
 });
 
-export const { setLoading, setContent, setError, setSelectedFileName, clearContent } = fileContentSlice.actions;
+export const { setLoading, setContent, setError, setSelectedFileName, clearContent, setDeleteFileName } = fileContentSlice.actions;
 
 export default fileContentSlice.reducer;

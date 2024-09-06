@@ -1,8 +1,7 @@
-import {RootState} from "../redux/store.ts";
 import S3ClientSingleton from "../s3-client-singleton.ts";
-import {IS3Credentials} from "../redux/features/s3ClientSlice.ts";
+import { IS3Credentials } from "../redux/features/s3ClientSlice.ts";
 
-export const getS3ClientAndConfig = (getState: () => RootState) => {
+export const getS3ClientAndConfig = (getState: () => any) => {
     const state = getState();
     const config = state.s3Client.config;
 
@@ -11,6 +10,11 @@ export const getS3ClientAndConfig = (getState: () => RootState) => {
     }
 
     const s3Client = S3ClientSingleton.getInstance(config as IS3Credentials);
+    const bucketName = config.bucketName;
 
-    return { s3Client, config };
+    if (!bucketName) {
+        throw new Error('Bucket name is not specified.');
+    }
+
+    return { s3Client, config, bucketName };
 };
