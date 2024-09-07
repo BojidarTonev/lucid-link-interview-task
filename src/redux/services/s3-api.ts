@@ -80,15 +80,16 @@ export const s3Api = createApi({
             },
             invalidatesTags: ['files']
         }),
-        uploadDirectory: builder.mutation<PutObjectCommandOutput, {directoryName: string}>({
+        uploadDirectory: builder.mutation<PutObjectCommandOutput, { directoryName: string }>({
             queryFn: async ({ directoryName }, { getState }) => {
                 try {
                     const { s3Client, bucketName } = getS3ClientAndConfig(() => getState());
 
+                    const placeholderFileName = `${directoryName}/.placeholder`;
                     const command = new PutObjectCommand({
                         Bucket: bucketName,
-                        Key: directoryName,
-                        Body: '',
+                        Key: placeholderFileName,
+                        Body: '', // Empty body for placeholder
                         ContentType: 'text/plain',
                     });
 
@@ -121,4 +122,10 @@ export const s3Api = createApi({
     })
 });
 
-export const { useGetFilesQuery, useLazyGetFileContentQuery, useUploadFileMutation, useDeleteFileMutation } = s3Api;
+export const {
+    useGetFilesQuery,
+    useLazyGetFileContentQuery,
+    useUploadFileMutation,
+    useDeleteFileMutation,
+    useUploadDirectoryMutation,
+} = s3Api;
