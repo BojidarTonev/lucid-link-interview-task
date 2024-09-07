@@ -8,12 +8,13 @@ class S3ClientSingleton {
 
     private constructor() {}
 
-    public static getInstance(encryptedConfig?: string): S3Client {
+    public static getInstance(encryptedConfig?: string): S3Client | null {
         if (encryptedConfig) {
             const config = decryptData(encryptedConfig);
 
             if (!config) {
-                throw new Error('Failed to decrypt S3 configuration.');
+                // throw new Error('Failed to decrypt S3 configuration.');
+                return null;
             }
 
             if (!S3ClientSingleton.instance) {

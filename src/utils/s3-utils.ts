@@ -2,7 +2,10 @@ import CryptoJS from 'crypto-js';
 import S3ClientSingleton from "../s3-client-singleton.ts";
 import { IS3Credentials } from "../redux/features/s3-client-slice.ts";
 
-const ENCRYPTION_KEY = 'testtest';
+// this check here would not be made in prod, but since .env file
+// would not be present on repo clone, default value is passed in
+// order to have the app running with additional layer of security
+const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY || 'some_key';
 
 export const getS3ClientAndConfig = (getState: () => any) => {
     const state = getState();
