@@ -35,7 +35,7 @@ export const s3Api = createApi({
             },
             providesTags: ['files']
         }),
-        getFileContent: builder.query<string, any>({
+        getFileContent: builder.query<string, string>({
             queryFn: async (key, api) => {
                 api.dispatch(setLoading(true));
                 try {
