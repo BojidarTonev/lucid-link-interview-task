@@ -71,7 +71,7 @@ const TreeNode: FC<ITreeNodeProps> = ({ node, label, fullPath }) => {
 
     return (
         <li className="tree-node-wrapper">
-            <div className={`${isOpen ? 'open-list-item' : 'closed-list-item'} outer-list-item-wrapper`} onClick={() => setIsOpen(!isOpen)}>
+            <div className={`${isOpen  && !isEmptyDirectory ? 'open-list-item' : 'closed-list-item'} outer-list-item-wrapper`} onClick={() => setIsOpen(!isOpen)}>
                 {isObject && !isEmptyDirectory && <span style={{ marginRight: 5 }}>
                     {isOpen ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleRight} />}
                 </span>}
