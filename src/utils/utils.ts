@@ -74,5 +74,5 @@ const readStreamToText = async (
 
 export {
     transformFilesToTreeStructure,
-    readStreamToText
+    readStreamToText,
 }

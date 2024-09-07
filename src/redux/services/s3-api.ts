@@ -7,7 +7,11 @@ import {
     PutObjectCommandOutput, DeleteObjectCommandOutput
 } from '@aws-sdk/client-s3';
 import {setContent, setError, setLoading} from "../features/file-content-slice.ts";
-import {IFileStructure, readStreamToText, transformFilesToTreeStructure} from "../../utils/utils.ts";
+import {
+    IFileStructure,
+    readStreamToText,
+    transformFilesToTreeStructure
+} from "../../utils/utils.ts";
 import {getS3ClientAndConfig} from "../../utils/s3-utils.ts";
 
 export const s3Api = createApi({
