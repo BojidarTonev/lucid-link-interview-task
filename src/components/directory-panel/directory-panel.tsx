@@ -36,6 +36,8 @@ const DirectoryPanel: FC = () => {
     }
 
     const renderDirectoryContent = useCallback(() => {
+        const errorMessage = typeof error === 'string' ? error : "Error loading files data. Please try again!";
+
         if (!isAuthenticated) {
             return <div className="not-logged-in-wrapper">
                 <div className="not-logged-in-message">You are not logged in. Please log in to access any services.</div>
@@ -43,7 +45,7 @@ const DirectoryPanel: FC = () => {
             </div>
         }
         if (error) {
-            return <ErrorText text="Error loading files data. Please try again!" />
+            return <ErrorText text={errorMessage} />
         }
         if (isLoading) {
             return <Loader />
