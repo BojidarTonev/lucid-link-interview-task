@@ -6,7 +6,7 @@ import {
 } from "../../redux/features/file-content-slice.ts";
 import { useLazyGetFileContentQuery } from "../../redux/services/s3-api.ts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleRight, faFolderPlus, faPlus, faTrash, faFolderMinus } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleRight, faFolderPlus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ModalTypes, openModal } from "../../redux/features/modal-slice.ts";
 import { useAppDispatch, useAppSelector } from "../../redux/store.ts";
 import { IFileStructure } from "../../utils/utils.ts";
@@ -91,7 +91,7 @@ const TreeNode: FC<ITreeNodeProps> = ({ node, label, fullPath }) => {
                  <div className="outer-list-operations">
                     <FontAwesomeIcon icon={faPlus} onClick={(e) => onAddElementClick(e, fullPath)} />
                     <FontAwesomeIcon icon={faFolderPlus} onClick={(e) => onAddDirectoryClick(e, fullPath)} />
-                    <FontAwesomeIcon icon={faFolderMinus} onClick={(e) => onDeleteDirectoryClick(e, fullPath)} className="delete-operation-icon" />
+                    <FontAwesomeIcon icon={faTrash} onClick={(e) => onDeleteDirectoryClick(e, fullPath)} className="delete-operation-icon" />
                 </div>
             </div>
 
