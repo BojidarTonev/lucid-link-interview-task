@@ -1,7 +1,9 @@
 # React + TypeScript + Vite
 
-sample .env config : 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## sample .env config : 
+VITE_ENCRYPTION_KEY=encryption_key
+VITE_MODE=development
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.##
 
 Currently, two official plugins are available:
 VITE_ENCRYPTION_KEY=encryption_key
