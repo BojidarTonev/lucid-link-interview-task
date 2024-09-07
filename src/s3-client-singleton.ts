@@ -13,7 +13,7 @@ class S3ClientSingleton {
             const config = decryptData(encryptedConfig);
 
             if (!config) {
-                // not correct present config, should prompt the user to log in
+                // not correct present config, should prompt the user to log in to provide config
                 return null;
             }
 
@@ -27,6 +27,7 @@ class S3ClientSingleton {
                     },
                 });
             } else if (S3ClientSingleton.config !== config) {
+                // should provide config from login
                 // throw new Error('S3Client instance already created with different configuration.');
             }
 
