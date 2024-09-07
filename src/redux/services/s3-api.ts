@@ -119,6 +119,26 @@ export const s3Api = createApi({
             },
             invalidatesTags: ['files']
         }),
+        deleteDirectory: builder.mutation<void, string[]>({
+            queryFn: async (fileKeys, { getState }) => {
+                try {
+                    const { s3Client, bucketName } = getS3ClientAndConfig(() => getState());
+
+                    await Promise.all(fileKeys.map(fileKey => {
+                        const command = new DeleteObjectCommand({
+                            Bucket: bucketName,
+                            Key: fileKey,
+                        });
+                        return s3Client.send(command);
+                    }));
+
+                    return { data: undefined };
+                } catch (err: any) {
+                    return { error: err?.message };
+                }
+            },
+            invalidatesTags: ['files']
+        }),
     })
 });
 
@@ -128,4 +148,5 @@ export const {
     useUploadFileMutation,
     useDeleteFileMutation,
     useUploadDirectoryMutation,
+    useDeleteDirectoryMutation,
 } = s3Api;

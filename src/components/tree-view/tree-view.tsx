@@ -1,12 +1,12 @@
 import {FC, MouseEvent, useMemo, useState} from "react";
 import {
-    setDeleteFileName,
+    setDeleteFileName, setDeleteNode,
     setSelectedFileName,
     setUploadFileDirectory
 } from "../../redux/features/file-content-slice.ts";
 import { useLazyGetFileContentQuery } from "../../redux/services/s3-api.ts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleRight, faFolderPlus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleRight, faFolderPlus, faPlus, faTrash, faFolderMinus } from '@fortawesome/free-solid-svg-icons';
 import { ModalTypes, openModal } from "../../redux/features/modal-slice.ts";
 import { useAppDispatch, useAppSelector } from "../../redux/store.ts";
 import { IFileStructure } from "../../utils/utils.ts";
@@ -69,6 +69,18 @@ const TreeNode: FC<ITreeNodeProps> = ({ node, label, fullPath }) => {
         }));
     }
 
+    const onDeleteDirectoryClick = (e: MouseEvent<SVGSVGElement>, directory: string) => {
+        e.stopPropagation();
+
+        dispatch(setDeleteFileName(directory));
+        dispatch(setDeleteNode(node));
+        dispatch(openModal({
+            title: 'ARE YOU SURE YOU WANT TO DELETE DIRECTORY:',
+            subTitle: directory,
+            modalType: ModalTypes.DeleteDirectoryModal
+        }));
+    }
+
     return (
         <li className="tree-node-wrapper">
             <div className={`${isOpen  && !isEmptyDirectory ? 'open-list-item' : 'closed-list-item'} outer-list-item-wrapper`} onClick={() => setIsOpen(!isOpen)}>
@@ -77,8 +89,9 @@ const TreeNode: FC<ITreeNodeProps> = ({ node, label, fullPath }) => {
                 </span>}
                 <span>{label}</span>
                  <div className="outer-list-operations">
-                    <FontAwesomeIcon icon={faPlus} onClick={(e) => onAddElementClick(e, fullPath)}/>
-                    <FontAwesomeIcon icon={faFolderPlus} onClick={(e) => onAddDirectoryClick(e, fullPath)}/>
+                    <FontAwesomeIcon icon={faPlus} onClick={(e) => onAddElementClick(e, fullPath)} />
+                    <FontAwesomeIcon icon={faFolderPlus} onClick={(e) => onAddDirectoryClick(e, fullPath)} />
+                    <FontAwesomeIcon icon={faFolderMinus} onClick={(e) => onDeleteDirectoryClick(e, fullPath)} className="delete-operation-icon" />
                 </div>
             </div>
 
@@ -107,7 +120,7 @@ const TreeNode: FC<ITreeNodeProps> = ({ node, label, fullPath }) => {
                                         key={index}
                                         onDoubleClick={() => handleFileDoubleClick(fileName)}
                                     >
-                                        <FontAwesomeIcon icon={faTrash} onClick={(e) => onDeleteElementClick(e, fileName)} />
+                                        <FontAwesomeIcon icon={faTrash} onClick={(e) => onDeleteElementClick(e, fileName)} className="delete-operation-icon" />
                                         <span>{fileName}</span>
                                     </li>
                                 )

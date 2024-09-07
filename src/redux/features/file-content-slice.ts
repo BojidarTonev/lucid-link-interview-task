@@ -1,12 +1,24 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {IFileStructure} from "../../utils/utils.ts";
 
-const initialState = {
+interface IFileContentState {
+    content: string,
+    loading: boolean,
+    error: any,
+    selectedFileName: string;
+    deleteFileName: string;
+    uploadFileDirectory: string;
+    deleteNode: IFileStructure | null
+}
+
+const initialState: IFileContentState = {
     content: '',
     loading: false,
     error: null,
     selectedFileName: '',
     deleteFileName: '',
-    uploadFileDirectory: ''
+    uploadFileDirectory: '',
+    deleteNode: null,
 };
 
 export const fileContentSlice = createSlice({
@@ -34,6 +46,9 @@ export const fileContentSlice = createSlice({
         setUploadFileDirectory: (state, action: PayloadAction<string>) => {
             state.uploadFileDirectory = action.payload;
         },
+        setDeleteNode: (state, action: PayloadAction<IFileStructure>) => {
+            state.deleteNode = action.payload;
+        },
         clearFileContent: (state) => {
             state.content = '';
             state.selectedFileName = '';
@@ -52,6 +67,7 @@ export const {
     setSelectedFileName,
     clearFileContent,
     setDeleteFileName,
+    setDeleteNode,
     setUploadFileDirectory
 } = fileContentSlice.actions;
 

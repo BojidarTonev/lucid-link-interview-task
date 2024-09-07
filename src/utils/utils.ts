@@ -72,7 +72,33 @@ const readStreamToText = async (
     });
 };
 
+const isDeletePathContainedInFilePath = (deletePath: string, filePath: string): boolean => {
+    const normalizedDeletePath = deletePath.replace(/^\/+/, '').replace(/\/+$/, '');
+    const normalizedFilePath = filePath.replace(/^\/+/, '').replace(/\/+$/, '');
+
+    return normalizedFilePath.startsWith(normalizedDeletePath) &&
+        (normalizedFilePath === normalizedDeletePath || normalizedFilePath[normalizedDeletePath.length] === '/');
+};
+
+const collectAllFilesAndDirectories = (node: IFileStructure, fullPath: string, result: string[] = []): string[] => {
+    if (node.files) {
+        node.files.forEach(file => {
+            result.push(`${fullPath}${file}`.replace(/\/+/g, '/'));
+        });
+    }
+
+    Object.entries(node).forEach(([key, value]) => {
+        if (typeof value === 'object' && key !== 'path' && key !== 'files') {
+            collectAllFilesAndDirectories(value as IFileStructure, `${fullPath}${key}/`, result);
+        }
+    });
+
+    return result.map(el => el.replace(/^\//, ''));
+};
+
 export {
     transformFilesToTreeStructure,
     readStreamToText,
+    isDeletePathContainedInFilePath,
+    collectAllFilesAndDirectories
 }

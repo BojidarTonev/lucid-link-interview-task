@@ -5,6 +5,7 @@ export enum ModalTypes {
     AddFileModal = 'AddFileModal',
     AddDirectoryModal = 'AddDirectoryModal',
     DeleteFileModal = 'DeleteFileModal',
+    DeleteDirectoryModal = 'DeleteDirectoryModal',
     ViewFileFullContentModal = 'ViewFullContentModal',
 }
 
