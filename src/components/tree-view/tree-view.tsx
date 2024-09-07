@@ -32,7 +32,7 @@ const TreeNode: FC<ITreeNodeProps> = ({ node, label, fullPath }) => {
 
     const isEmptyDirectory = useMemo(() => {
         return node.files.length === 1 && node.files[0] === '.placeholder' && Object.keys(node).length === 2;
-    }, [node.length]);
+    }, [node]);
 
     const handleFileDoubleClick = (fileName: string) => {
         if (!fileName) {
