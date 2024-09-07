@@ -11,7 +11,7 @@ interface IErrorLayoutProps {
 const ErrorLayout: FC<IErrorLayoutProps> = ({errorText}) => {
     return(<div className="error-layout">
         <ErrorText text={errorText} hasBackground />
-        <Button onClick={() => location.reload()} text="Reload page" isPrimary />
+        <Button onClick={() => location.reload()} text="Reload page" />
         <img src={LucidLinkLogo} className="error-logo" alt="lucid-link-logo" />
     </div>)
 }

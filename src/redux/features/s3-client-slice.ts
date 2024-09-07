@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {encryptData} from "../../utils/s3-utils.ts";
 
 export interface IS3Credentials {
     accessKeyId: string,
@@ -8,11 +9,11 @@ export interface IS3Credentials {
 }
 
 interface S3ClientState {
-    config: IS3Credentials | null;
+    encryptedConfig: string | null;
 }
 
 const initialState: S3ClientState = {
-    config: null,
+    encryptedConfig: null,
 };
 
 export const s3ClientSlice = createSlice({
@@ -20,10 +21,10 @@ export const s3ClientSlice = createSlice({
     initialState,
     reducers: {
         setS3ClientConfig(state, action: PayloadAction<IS3Credentials>) {
-            state.config = action.payload;
+            state.encryptedConfig = encryptData(action.payload);
         },
         clearS3ClientConfig(state) {
-            state.config = null;
+            state.encryptedConfig = null;
         },
     },
 });

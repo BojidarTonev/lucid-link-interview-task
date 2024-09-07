@@ -4,29 +4,23 @@ import Button from "../../button/button.tsx";
 import S3ClientSingleton from "../../../s3-client-singleton.ts";
 import ErrorText from "../../error-text/error-text.tsx";
 import {closeModal} from "../../../redux/features/modal-slice.ts";
-import {setS3ClientConfig} from "../../../redux/features/s3-client-slice.ts";
+import {IS3Credentials, setS3ClientConfig} from "../../../redux/features/s3-client-slice.ts";
 import {useAppDispatch} from "../../../redux/store.ts";
+import {encryptData} from "../../../utils/s3-utils.ts";
 
-interface IAuthFormData {
-    accessKeyId: string;
-    secretAccessKey: string;
-    bucketName: string;
-    regionName: string;
-}
-
-const INITIAL_DATA: IAuthFormData = {
+const INITIAL_DATA: IS3Credentials = {
     accessKeyId: '',
     secretAccessKey: '',
     bucketName: '',
-    regionName: ''
+    region: ''
 };
 
 const AuthModal = () => {
     const dispatch = useAppDispatch();
     const [errorText, setErrorText] = useState<string>('');
-    const [formData, setFormData]= useState<IAuthFormData>(INITIAL_DATA);
+    const [formData, setFormData]= useState<IS3Credentials>(INITIAL_DATA);
 
-    const onFormDataChange = (value: string, prop: keyof IAuthFormData) => {
+    const onFormDataChange = (value: string, prop: keyof IS3Credentials) => {
         setFormData((prev) => ({
             ...prev,
             [prop]: value,
@@ -34,11 +28,12 @@ const AuthModal = () => {
     }
 
     const onLoginButtonSubmit = () => {
-        const { accessKeyId, secretAccessKey, bucketName, regionName } = formData;
+        const { accessKeyId, secretAccessKey, bucketName, region } = formData;
+        const encryptedConfig = encryptData(formData);
         try {
-            S3ClientSingleton.getInstance({ accessKeyId, secretAccessKey, region: regionName, bucketName });
+            S3ClientSingleton.getInstance(encryptedConfig);
             setErrorText('');
-            dispatch(setS3ClientConfig({ accessKeyId, secretAccessKey, bucketName, region: regionName }));
+            dispatch(setS3ClientConfig({ accessKeyId, secretAccessKey, bucketName, region }));
             dispatch(closeModal());
             console.log('Login successful!');
         } catch {
@@ -69,10 +64,10 @@ const AuthModal = () => {
                 onChange={(value) => onFormDataChange(value, 'bucketName')}
             />
             <InputField
-                value={formData.regionName}
+                value={formData.region}
                 label="Region name"
                 placeholder="Region name..."
-                onChange={(value) => onFormDataChange(value, 'regionName')}
+                onChange={(value) => onFormDataChange(value, 'region')}
             />
         <div>
             <Button onClick={onLoginButtonSubmit} text="Log in" />
