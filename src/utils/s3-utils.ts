@@ -5,6 +5,7 @@ import { IS3Credentials } from "../redux/features/s3-client-slice.ts";
 // this check here would not be made in prod, but since .env file
 // would not be present on repo clone, default value is passed in
 // order to have the app running with additional layer of security
+// and no need to manually create .env file and pass data to it on clone
 const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY || 'some_key';
 
 export const getS3ClientAndConfig = (getState: () => any) => {

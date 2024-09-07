@@ -13,7 +13,7 @@ class S3ClientSingleton {
             const config = decryptData(encryptedConfig);
 
             if (!config) {
-                // throw new Error('Failed to decrypt S3 configuration.');
+                // not correct present config, should prompt the user to log in
                 return null;
             }
 
